@@ -3,3 +3,14 @@ jobs:
   pr:
     runs-on: ubuntu-20.04
     steps:
+      - run: |
+          set -euo pipefail
+          echo '::group::Event payload'
+            jq . "$GITHUB_EVENT_PATH"
+          echo '::endgroup::'
+          sudo apt-get install -y curl jq
+          STATUSES_URL="$(jq --raw-output '.pull_request.statuses_url' "$GITHUB_EVENT_PATH")"
+          printf 'STATUSES_URL: %s\n' "$STATUSES_URL"
+          STATUS='{"state": "failure", "target_url": "https://pip.pypa.io/en/latest/development/contributing/#news-entries"}'
+          curl -X POST -H 'Accept: application/vnd.github.v3+json' "$STATUSES_URL" -d "$STATUS" > out.txt
+          cat out.txt
