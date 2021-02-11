@@ -14,8 +14,10 @@ jobs:
           curl \
             -X POST \
             -H 'Accept: application/vnd.github.v3+json' \
-            -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
             "$STATUSES_URL" \
-            -d '{"state": "failure"}' \
+            -d '{"state": "failure", "target_url": "https://pip.pypa.io/en/latest/development/contributing/#news-entries"}' \
             > out.txt
           cat out.txt
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
