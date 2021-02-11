@@ -1,3 +1,4 @@
+name: news-file
 on: pull_request_target
 jobs:
   pr:
