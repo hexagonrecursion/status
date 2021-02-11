@@ -11,6 +11,6 @@ jobs:
           sudo apt-get install -y curl jq
           STATUSES_URL="$(jq --raw-output '.pull_request.statuses_url' "$GITHUB_EVENT_PATH")"
           printf 'STATUSES_URL: %s\n' "$STATUSES_URL"
-          STATUS='{"state": "failure", "target_url": "https://pip.pypa.io/en/latest/development/contributing/#news-entries"}'
+          STATUS='{"state": "failure"}'
           curl -X POST -H 'Accept: application/vnd.github.v3+json' "$STATUSES_URL" -d "$STATUS" > out.txt
           cat out.txt
