@@ -16,7 +16,7 @@ jobs:
             -H 'Accept: application/vnd.github.v3+json' \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             "$STATUSES_URL" \
-            -d '{"state": "failure", "target_url": "https://pip.pypa.io/en/latest/development/contributing/#news-entries"}' \
+            -d '{"state": "failure", "context": "news-file/pr", "target_url": "https://pip.pypa.io/en/latest/development/contributing/#news-entries"}' \
             > out.txt
           cat out.txt
         env:
